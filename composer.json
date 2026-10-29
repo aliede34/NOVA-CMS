@@ -1,0 +1,15 @@
+{
+    "name": "novacms/cms",
+    "description": "Ultra-lightweight, Zero-Config, Portable PHP 8 Content Management System",
+    "type": "project",
+    "license": "(MIT OR GPL-3.0-or-later)",
+    "require": {
+        "php": ">=8.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^13.4"
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}

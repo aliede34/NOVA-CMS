@@ -1,0 +1,43 @@
+name: NovaCMS CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: pdo, pdo_sqlite, mbstring, json
+        coverage: none
+
+    - name: Check PHP Syntax (Linting)
+      run: |
+        find . -name "*.php" ! -path "./vendor/*" -exec php -l {} +
+
+    - name: Test Database Initialization & SQLite Connection
+      run: |
+        php -r "require_once 'config.php'; initDB(); echo 'Database Init Successful' . PHP_EOL;"
+
+    - name: Test RESTful API Endpoints
+      run: |
+        php -f api/posts.php
+        php -f api/categories.php
+        php -f api/tags.php
+
+    - name: Install Composer Dependencies
+      run: composer install --prefer-dist --no-progress
+
+    - name: Run PHPUnit Test Suite
+      run: vendor/bin/phpunit
+

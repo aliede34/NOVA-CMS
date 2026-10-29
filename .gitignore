@@ -1,0 +1,13 @@
+# System & Environment
+database.sqlite
+vendor/
+.phpunit.cache
+uploads/*
+!uploads/.gitkeep
+cache/*
+!cache/.gitkeep
+.env
+*.log
+.DS_Store
+Thumbs.db
+

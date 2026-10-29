@@ -1,0 +1,31 @@
+# Apache Yapılandırması & Güvenlik Kuralları
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+</IfModule>
+
+# 1. database.sqlite dosyasının doğrudan indirilmesini engelle
+<Files "database.sqlite">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# 2. Hassas uzantıların web üzerinden okunmasını yasakla
+<FilesMatch "\.(sqlite|cache|lock|json|env|log|xml|md)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# 3. tests ve cache dizinlerine doğrudan erişimi engelle
+RedirectMatch 403 ^/(tests|cache)/.*$
+
+# 4. uploads klasöründe PHP dosyalarının çalıştırılmasını engelle (Zararlı yükleme koruması)
+<Directory "uploads">
+    <FilesMatch "\.(php|phtml|php3|php4|php5|php7|phps)$">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</Directory>
+
+# 5. Dizin listelemeyi kapat (Directory Browsing)
+Options -Indexes
+
