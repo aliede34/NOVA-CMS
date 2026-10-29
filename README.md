@@ -69,7 +69,7 @@ Geliştiriciler ve kullanıcılar, çekirdek koda dokunmadan diledikleri modül�
 ### Yöntem 1: Dahili PHP Sunucusu ile (Önerilen)
 
 ```bash
-git clone https://github.com/kullanici-adiniz/novacms.git
+git clone https://github.com/aliede34/NOVA-CMS.git
 cd novacms
 php -S localhost:8000
 ```
